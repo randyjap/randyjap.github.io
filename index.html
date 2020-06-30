@@ -16,39 +16,30 @@
     <link rel="stylesheet" type="text/css" href="css/ie9.css">
   <![endif]-->
 
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-39365077-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
 </head>
 <body onselectstart="return false">
-  <div id="signature-pad" class="signature-pad">
-    <div class="signature-pad--body">
-      <img id="question" src="1.jpg" style="max-width: 100%; max-height: 100%;"/>
-      <img id="answer" src="2.jpg" style="display: none; max-width: 100%; max-height: 100%;"/>
-      <canvas id="canvas" style="max-width: 100%; max-height: 100%;"></canvas>
-    </div>
-    <div class="signature-pad--footer">
-      <div class="description">Write On Paper Directly</div>
+  <div>
+    <div id="signature-pad--header" class="signature-pad--header" style="width: 100%; position: fixed; top: 0; z-index: 9999; background-color: white;">
 
       <div class="signature-pad--actions">
         <div>
           <button type="button" class="button" data-action="clear">Clear</button>
           <button type="button" class="button" data-action="change-color">Change color</button>
           <button type="button" class="button" data-action="undo">Undo</button>
-
-        </div>
-        <div>
           <button type="button" class="button" data-action="toggle-answer">Toggle Answer</button>
+          <button type="button" class="button">Report problem</button>
+          <button type="button" class="button">Mark "Got it right"</button>
+          <button type="button" class="button">Mark "Got it wrong"</button>
         </div>
       </div>
+
+    </div>
+  </div>
+  <div id="signature-pad" class="signature-pad">
+    <div class="signature-pad--body">
+      <img id="question" src="1.jpg" style="max-width: 100%; max-height: 100%;"/>
+      <img id="answer" src="2.jpg" style="display: none; max-width: 100%; max-height: 100%;"/>
+      <canvas id="canvas" style="max-width: 100%; max-height: 100%;"></canvas>
     </div>
   </div>
 
