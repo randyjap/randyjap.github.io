@@ -56,3 +56,7 @@ body {
           justify-content: space-between;
   margin: 15px;
 }
+
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
