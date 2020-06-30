@@ -1,12 +1,10 @@
 var wrapper = document.getElementById("signature-pad");
 var clearButton = wrapper.querySelector("[data-action=clear]");
-var redColorButton = wrapper.querySelector("[data-action=red-color]");
-var blackColorButton = wrapper.querySelector("[data-action=black-color]");
+var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var undoButton = wrapper.querySelector("[data-action=undo]");
-var checkButton = wrapper.querySelector("[data-action=check-button]");
-// var savePNGButton = wrapper.querySelector("[data-action=save-png]");
-// var saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
-// var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
+var savePNGButton = wrapper.querySelector("[data-action=save-png]");
+var saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
+var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
@@ -86,56 +84,38 @@ undoButton.addEventListener("click", function (event) {
   }
 });
 
-redColorButton.addEventListener("click", function (event) {
-  var r = 255;
-  var g = 0;
-  var b = 0;
+changeColorButton.addEventListener("click", function (event) {
+  var r = Math.round(Math.random() * 255);
+  var g = Math.round(Math.random() * 255);
+  var b = Math.round(Math.random() * 255);
   var color = "rgb(" + r + "," + g + "," + b +")";
 
   signaturePad.penColor = color;
 });
 
-blackColorButton.addEventListener("click", function (event) {
-  var r = 0;
-  var g = 0;
-  var b = 0;
-  var color = "rgb(" + r + "," + g + "," + b +")";
-
-  signaturePad.penColor = color;
-});
-
-checkButton.addEventListener("click", function (event) {
-  var answer = document.getElementById("answer");
-  if (answer.style.display == 'none') {
-    answer.style.display = 'block'
+savePNGButton.addEventListener("click", function (event) {
+  if (signaturePad.isEmpty()) {
+    alert("Please provide a signature first.");
   } else {
-    answer.style.display = 'none'
+    var dataURL = signaturePad.toDataURL();
+    download(dataURL, "signature.png");
   }
 });
 
-// savePNGButton.addEventListener("click", function (event) {
-//   if (signaturePad.isEmpty()) {
-//     alert("Please provide an answer first.");
-//   } else {
-//     var dataURL = signaturePad.toDataURL();
-//     download(dataURL, "signature.png");
-//   }
-// });
+saveJPGButton.addEventListener("click", function (event) {
+  if (signaturePad.isEmpty()) {
+    alert("Please provide a signature first.");
+  } else {
+    var dataURL = signaturePad.toDataURL("image/jpeg");
+    download(dataURL, "signature.jpg");
+  }
+});
 
-// saveJPGButton.addEventListener("click", function (event) {
-//   if (signaturePad.isEmpty()) {
-//     alert("Please provide an answer first.");
-//   } else {
-//     var dataURL = signaturePad.toDataURL("image/jpeg");
-//     download(dataURL, "signature.jpg");
-//   }
-// });
-
-// saveSVGButton.addEventListener("click", function (event) {
-//   if (signaturePad.isEmpty()) {
-//     alert("Please provide an answer first.");
-//   } else {
-//     var dataURL = signaturePad.toDataURL('image/svg+xml');
-//     download(dataURL, "signature.svg");
-//   }
-// });
+saveSVGButton.addEventListener("click", function (event) {
+  if (signaturePad.isEmpty()) {
+    alert("Please provide a signature first.");
+  } else {
+    var dataURL = signaturePad.toDataURL('image/svg+xml');
+    download(dataURL, "signature.svg");
+  }
+});
