@@ -2,14 +2,14 @@ var wrapper = document.getElementById("signature-pad");
 var clearButton = wrapper.querySelector("[data-action=clear]");
 var changeColorButton = wrapper.querySelector("[data-action=change-color]");
 var undoButton = wrapper.querySelector("[data-action=undo]");
-var savePNGButton = wrapper.querySelector("[data-action=save-png]");
-var saveJPGButton = wrapper.querySelector("[data-action=save-jpg]");
-var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
+var toggleAnswerButton = wrapper.querySelector("[data-action=toggle-answer]");
+var answer = document.getElementById("answer");
+var question = document.getElementById("question");
 var canvas = wrapper.querySelector("canvas");
 var signaturePad = new SignaturePad(canvas, {
   // It's Necessary to use an opaque color when saving image as JPEG;
   // this option can be omitted if only saving as PNG or SVG
-  backgroundColor: 'rgb(255, 255, 255)'
+  backgroundColor: 'rgb(255, 255, 255, 0)'
 });
 
 // Adjust canvas coordinate space taking into account pixel ratio,
@@ -85,37 +85,23 @@ undoButton.addEventListener("click", function (event) {
 });
 
 changeColorButton.addEventListener("click", function (event) {
-  var r = Math.round(Math.random() * 255);
-  var g = Math.round(Math.random() * 255);
-  var b = Math.round(Math.random() * 255);
-  var color = "rgb(" + r + "," + g + "," + b +")";
-
-  signaturePad.penColor = color;
-});
-
-savePNGButton.addEventListener("click", function (event) {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
+  var red = "rgb(255, 0, 0)";
+  var black = "rgb(0, 0, 0)";
+  if (signaturePad.penColor == red) {
+    signaturePad.penColor = black;
   } else {
-    var dataURL = signaturePad.toDataURL();
-    download(dataURL, "signature.png");
+    signaturePad.penColor = red;
   }
 });
 
-saveJPGButton.addEventListener("click", function (event) {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
+toggleAnswerButton.addEventListener("click", function (event) {
+  if (answer.style.display == 'none') {
+    answer.style.display = 'block';
+    question.style.display ='none'
+    canvas.style.display ='none'
   } else {
-    var dataURL = signaturePad.toDataURL("image/jpeg");
-    download(dataURL, "signature.jpg");
-  }
-});
-
-saveSVGButton.addEventListener("click", function (event) {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide a signature first.");
-  } else {
-    var dataURL = signaturePad.toDataURL('image/svg+xml');
-    download(dataURL, "signature.svg");
+    answer.style.display = 'none';
+    question.style.display ='block'
+    canvas.style.display ='block'
   }
 });
