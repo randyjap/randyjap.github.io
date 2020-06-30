@@ -105,11 +105,11 @@ blackColorButton.addEventListener("click", function (event) {
 });
 
 checkButton.addEventListener("click", function (event) {
-  if (signaturePad.isEmpty()) {
-    alert("Please provide an answer first.");
+  var answer = document.getElementById("answer");
+  if (answer.style.display == 'none') {
+    answer.style.display = 'block'
   } else {
-    var dataURL = signaturePad.toDataURL();
-    download(dataURL, "signature.png");
+    answer.style.display = 'none'
   }
 });
 
