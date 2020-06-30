@@ -37,7 +37,7 @@ function resizeCanvas() {
 
 // On mobile devices it might make more sense to listen to orientation change,
 // rather than window resize events.
-window.onresize = resizeCanvas;
+// window.onresize = resizeCanvas;
 resizeCanvas();
 
 function download(dataURL, filename) {
